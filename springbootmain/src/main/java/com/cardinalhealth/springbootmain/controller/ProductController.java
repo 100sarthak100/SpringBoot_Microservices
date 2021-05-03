@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,19 @@ public class ProductController {
 	public ResponseEntity<List<ProductModel>> getProducts() {
 		List<ProductModel> products = productService.getProducts();
 		return new ResponseEntity<List<ProductModel>>(products, HttpStatus.OK);
+	}
+
+	@GetMapping("/{productId}")
+	public ResponseEntity<ProductModel> getProduct(@PathVariable("productId") Integer productId) {
+		ProductModel product = new ProductModel();
+		if (productService.isProductExists(productId)) {
+			product = productService.getProduct(productId);
+			return new ResponseEntity<ProductModel>(product, HttpStatus.FOUND);
+		}		
+		else
+		{
+			return new ResponseEntity<ProductModel>(product, HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@PostMapping

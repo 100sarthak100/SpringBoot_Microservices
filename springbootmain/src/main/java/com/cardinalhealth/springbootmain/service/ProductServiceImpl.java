@@ -39,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductModel getProduct(int productId) {
 		Optional<ProductModel> product = productDAO.findById(productId);
+		System.out.println(product);
 		ProductModel p = product.get();
 		return p;	
 	}
