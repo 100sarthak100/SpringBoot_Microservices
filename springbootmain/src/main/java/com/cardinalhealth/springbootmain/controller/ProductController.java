@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cardinalhealth.springbootmain.model.ProductModel;
 import com.cardinalhealth.springbootmain.service.ProductService;
 
-@CrossOrigin(origins = {"http://localhost:9000"})
+@CrossOrigin(origins = {"http://localhost:9000", "http://localhost:9001"})
 
 @RestController
 @RequestMapping("product")
@@ -32,6 +32,12 @@ public class ProductController {
 	@GetMapping
 	public ResponseEntity<List<ProductModel>> getProducts() {
 		List<ProductModel> products = productService.getProducts();
+		return new ResponseEntity<List<ProductModel>>(products, HttpStatus.OK);
+	}
+	
+	@GetMapping("name/{productName}")
+	public ResponseEntity<List<ProductModel>> searchByProductName(@PathVariable("productName") String productName){
+		List<ProductModel> products = productService.findByProductName(productName);
 		return new ResponseEntity<List<ProductModel>>(products, HttpStatus.OK);
 	}
 

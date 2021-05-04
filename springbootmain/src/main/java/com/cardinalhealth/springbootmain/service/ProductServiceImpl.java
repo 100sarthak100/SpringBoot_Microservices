@@ -43,6 +43,11 @@ public class ProductServiceImpl implements ProductService {
 		ProductModel p = product.get();
 		return p;	
 	}
+	
+	@Override
+	public List<ProductModel> findByProductName(String productName) {
+		return productDAO.findByProductName(productName);
+	}
 
 	@Override
 	public boolean isProductExists(int productId) {

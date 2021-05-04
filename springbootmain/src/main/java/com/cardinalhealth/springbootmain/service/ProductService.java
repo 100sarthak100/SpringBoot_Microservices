@@ -16,6 +16,8 @@ public interface ProductService {
 
 	public ProductModel getProduct(int productId);
 	
+	public List<ProductModel> findByProductName(String productName);
+	
 	public boolean isProductExists(int productId);
 	
 }
